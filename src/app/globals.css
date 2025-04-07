@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "BioRhyme", serif;
+  background: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 50rem;
+}
+.keyboard {
+  transform: rotateX(10deg) rotateZ(0deg);
+  transform-style: preserve-3d;
+  background: #1e293b;
+  border-radius: 2rem;
+  padding: 2.5rem;
+  box-shadow: inset 0.5rem 0.5rem 1px 1rem #94a3b8,
+    inset 2rem 2rem 1px 1rem #64748b;
+  gap: 0 1rem;
+}
+.keyboard-wrapper {
+  transform: scale(0.5); /* Scale down the keyboard by 50% */
+  transform-origin: center center;
+}
+.keyboard .cover {
+  display: flex;
+  width: 105%;
+  height: 115%;
+  position: absolute;
+  top: -30px;
+  left: -35px;
+  background: transparent;
+  border-radius: 2rem;
+  box-shadow: inset 0.5rem 0.5rem 0.2rem 0.3rem #f1f5f9,
+    inset -1rem -1rem 0 0.4rem #f1f5f9, inset -1rem -1rem 0 0.4rem #cbd5e1,
+    inset -1rem -1rem 0.5rem 0rem #64748b, 0 0 #e2e8f0, 0.2rem 0.2rem #e2e8f0,
+    0rem 0rem #e2e8f0, 0.9rem 0.9rem #e2e8f0, 1.2rem 1.2rem #e2e8f0,
+    1.5rem 1.5rem #e2e8f0, 1.8rem 1.8rem #e2e8f0, 2.1rem 2.1rem #e2e8f0,
+    2.4rem 2.4rem #e2e8f0, 2.7rem 2.7rem #e2e8f0;
+}
+.row {
+  display: flex;
+  gap: 0 3rem;
+}
+.row:not(:first-child) {
+  filter: drop-shadow(2rem -0.5rem 0.5rem rgba(51, 65, 85, 0.3));
+}
+.row:not(:first-child) .key:not(:first-child) {
+  filter: drop-shadow(-0.5rem 0.5rem 0.5rem rgba(51, 65, 85, 0.3));
+}
+.row > .key.span {
+  flex: 1;
+}
+.row > .key.span .side {
+  width: 120%;
+  height: 237%;
+  transform: rotateZ(45deg) translate(24%, -14%) skew(337deg);
+  background-image: linear-gradient(#f1f5f9 25%, #cbd5e1 30%);
+}
+.row > .key.span .top::before {
+  transform: translate(5%, 5%);
+}
+.row > .key.span .top::after {
+  background-image: linear-gradient(-25deg, transparent 45%, #e2e8f0 55%);
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem 0;
+}
+.column > .key.span {
+  flex: 1;
+}
+.column > .key.span .side {
+  width: 220%;
+  height: 103%;
+  transform: rotateZ(45deg) translate(27%, 17%) skew(22deg);
+  background-image: linear-gradient(#fbd38d 70%, #ed8936 75%);
+}
+.column > .key.span .top::before {
+  background-color: #f6ad55;
+  transform: translate(5%, 5%);
+}
+.column > .key.span .top::after {
+  background-image: linear-gradient(291deg, transparent 45%, #f6ad55 50%);
+}
+.column:not(:first-child) {
+  filter: drop-shadow(-0.5rem 0.5rem 0.5rem rgba(51, 65, 85, 0.3));
+}
+.key {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  transform: translateX(-3rem) translateY(-3rem);
+  transform-style: preserve-3d;
+  user-select: none;
+  transition: transform 0.1s ease-out;
+}
+.key.active {
+  transform: translateX(-1rem) translateY(-1rem);
+}
+.key .char {
+  position: absolute;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #64748b;
+  text-shadow: 0.05rem 0rem 0 #94a3b8, 0.05rem 0.1rem 0 #0f172a,
+    0.1rem 0.05rem 0 #94a3b8, 0.1rem 0.15rem 0 #0f172a, 0.15rem 0.1rem 0 #94a3b8,
+    0.15rem 0.2rem 0 #0f172a, 0.2rem 0.15rem 0 #94a3b8, 0.2rem 0.25rem 0 #0f172a,
+    0.25rem 0.2rem 0 #94a3b8, 0.25rem 0.3rem 0 #0f172a;
+}
+.key .side {
+  position: absolute;
+  width: 120%;
+  height: 135%;
+  background-image: linear-gradient(#f1f5f9 45%, #cbd5e1 55%);
+  border-radius: 1rem;
+  transform: rotateZ(45deg) translate(28%, --8);
+}
+.key .top {
+  position: absolute;
+  width: 95%;
+  height: 95%;
+}
+.key .top::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #e2e8f0;
+  border-radius: 0.8em;
+  filter: blur(0.3rem);
+  transform: translate(7%, 7%);
+}
+.key .top::after {
+  content: "";
+  position: absolute;
+  width: 105%;
+  height: 105%;
+  background-image: linear-gradient(-45deg, transparent 45%, #e2e8f0 55%);
+  border-radius: 0.8rem;
+  box-shadow: inset -0.2rem -0.2rem 0.5rem -0.2rem white,
+    0.2rem 0.2rem 0.5rem -0.2rem white;
+}
